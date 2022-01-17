@@ -3,14 +3,14 @@ import Footer from "../../screens/Footer";
 
 const Container = styled.div`
   display: flex;
-  margin-top: 2rem;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 `;
 
 const Wrapper = styled.div`
-  max-width: 45vh;
+  max-width: 38vh;
   width: 100%;
   display: flex;
   justify-content: center;

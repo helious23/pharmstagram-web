@@ -2,7 +2,11 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faApple, faGooglePlay } from "@fortawesome/free-brands-svg-icons";
 
+const Wrapper = styled.div``;
+
 const AppNotice = styled.div`
+  width: 100%;
+  text-align: center;
   margin: 1.5rem 0;
 `;
 
@@ -13,13 +17,14 @@ const AppContainer = styled.div`
 `;
 
 const StoreBox = styled.div`
-  background-color: black;
+  background-color: ${(props) => props.theme.fontColor};
   padding: 0.3rem 0.9rem;
   display: flex;
   justify-content: center;
-  color: white;
+  color: ${(props) => props.theme.bgColor};
   border-radius: 0.3rem;
   margin: 0 0.3rem;
+  cursor: pointer;
 `;
 
 const StoreIcon = styled.div`
@@ -50,13 +55,14 @@ const GoogleStoreTextBox = styled.div`
       font-size: 0.6rem;
     }
     &:last-child {
+      margin-top: 0.2rem;
     }
   }
 `;
 
 const StoreWrapper = () => {
   return (
-    <>
+    <Wrapper>
       <AppNotice>앱을 다운로드하세요.</AppNotice>
       <AppContainer>
         <StoreBox>
@@ -78,7 +84,7 @@ const StoreWrapper = () => {
           </GoogleStoreTextBox>
         </StoreBox>
       </AppContainer>
-    </>
+    </Wrapper>
   );
 };
 

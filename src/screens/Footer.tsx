@@ -1,15 +1,19 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import { useReactiveVar } from "@apollo/client";
+import { darkModeVar, disableDarkMode, enableDarkMode } from "../apollo";
+import { faMoon, faSun } from "@fortawesome/free-regular-svg-icons";
 
 const Container = styled.footer`
   width: 100%;
-  margin-top: 4rem;
+  margin-top: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   font-size: 0.8rem;
-  color: #8e8e8e;
-  margin-bottom: 4rem;
+  color: ${(props) => props.theme.placeholderFontColor};
+  position: relative;
   &:first-child {
     display: flex;
     justify-content: center;
@@ -41,7 +45,15 @@ const FooterEndContainer = styled.div`
   }
 `;
 
+const DarkmodeBtn = styled.div`
+  margin-top: 1rem;
+  cursor: pointer;
+  position: absolute;
+  top: 2.2rem;
+`;
+
 const Footer = () => {
+  const darkMode = useReactiveVar(darkModeVar);
   return (
     <Container>
       <FooterContents>
@@ -62,6 +74,9 @@ const Footer = () => {
         <div>한국어</div>
         <div>&copy; {new Date().getFullYear()} Pharmstagram from Max</div>
       </FooterEndContainer>
+      <DarkmodeBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
+        <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+      </DarkmodeBtn>
     </Container>
   );
 };

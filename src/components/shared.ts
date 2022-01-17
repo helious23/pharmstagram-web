@@ -25,3 +25,26 @@ export const Subtitle = styled.div`
 export const FatText = styled.span`
   font-weight: 600;
 `;
+
+export const AuthLabel = styled.label`
+  width: 100%;
+  position: relative;
+`;
+
+export const AuthPlaceholder = styled.span<{ change: Boolean }>`
+  position: absolute;
+  top: ${(props) => (props.change ? "0.8rem" : "1.2rem")};
+  left: 0.6rem;
+  transition: all 0.1s ease-in-out;
+  font-size: ${(props) => (props.change ? "0.6rem" : "0.8rem")};
+  color: ${(props) => props.theme.placeholderFontColor};
+`;
+
+export const ErrorOutput = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
