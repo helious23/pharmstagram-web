@@ -8,7 +8,7 @@ export const BaseBox = styled.div`
 
 export const FatLink = styled.span`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   color: rgb(142, 142, 142);
 `;
 
@@ -19,11 +19,11 @@ export const Title = styled.div`
 
 export const Subtitle = styled.div`
   font-family: "Playball", cursive, sans-serif;
-  font-size: 30px;
+  font-size: 2rem;
 `;
 
 export const FatText = styled.span`
-  font-weight: 600;
+  font-weight: 700;
 `;
 
 export const AuthLabel = styled.label`
