@@ -43,7 +43,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      token: localStorage.getItem(TOKEN), // 기존의 header 에 token data 추가
+      token: localStorage.getItem(TOKEN),
     },
   };
 });
