@@ -115,7 +115,7 @@ const Comments: React.FC<ICommentsProps> = ({
       if (ok && userData?.me) {
         const newComment = {
           __typename: "Comment",
-          creatdAt: Date.now() + "",
+          createdAt: Date.now() + "",
           id,
           isMine: true,
           payload,
@@ -123,11 +123,26 @@ const Comments: React.FC<ICommentsProps> = ({
             ...userData.me,
           },
         };
+        const newCacheComment = cache.writeFragment({
+          fragment: gql`
+            fragment CommentCache on Comment {
+              id
+              createdAt
+              payload
+              isMine
+              user {
+                username
+                avatar
+              }
+            }
+          `,
+          data: newComment,
+        });
         cache.modify({
           id: `Photo:${photoId}`,
           fields: {
             comments(prev) {
-              return [...prev, newComment];
+              return [...prev, newCacheComment];
             },
             commentNumber(prev) {
               return prev + 1;
@@ -154,7 +169,7 @@ const Comments: React.FC<ICommentsProps> = ({
         {commentNumber > 0 ? (
           <CommentCount>
             <span>댓글 {commentNumber} 개 </span>
-            {commentNumber > 1 ? <span>모두보기</span> : ""}
+            {commentNumber > 4 ? <span>모두보기</span> : ""}
           </CommentCount>
         ) : (
           ""

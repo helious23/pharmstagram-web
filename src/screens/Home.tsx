@@ -43,6 +43,11 @@ const Home = () => {
       lastId: lastId,
     },
   });
+  useEffect(() => {
+    if (data?.seeFeed) {
+      setLastId(data?.seeFeed[data?.seeFeed?.length - 1]?.id);
+    }
+  }, [lastId]);
 
   return (
     <div>
