@@ -8,9 +8,10 @@
 // ====================================================
 
 export interface createComment_createComment {
-  __typename: "CreateCommentResult";
+  __typename: "CoreResponse";
   ok: boolean;
   error: string | null;
+  id: number | null;
 }
 
 export interface createComment {

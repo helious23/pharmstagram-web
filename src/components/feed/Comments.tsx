@@ -3,6 +3,7 @@ import { FatText } from "../shared";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
 import Comment from "./Comment";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useUser } from "../../hooks/useUser";
 import {
   ApolloCache,
   DefaultContext,
@@ -20,6 +21,7 @@ const CREATE_COMMENT = gql`
     createComment(photoId: $photoId, payload: $payload) {
       ok
       error
+      id
     }
   }
 `;
@@ -88,8 +90,10 @@ const Comments: React.FC<ICommentsProps> = ({
   comments,
   photoId,
 }) => {
-  const { register, handleSubmit, watch, setValue } =
+  const { register, handleSubmit, watch, setValue, getValues } =
     useForm<ICommentFormProps>();
+  const { data: userData } = useUser();
+
   const [createCommentMutation] = useMutation<
     createComment,
     createCommentVariables
@@ -99,7 +103,40 @@ const Comments: React.FC<ICommentsProps> = ({
     createCommentVariables,
     DefaultContext,
     ApolloCache<any>
-  > = (cache, result) => {};
+  > = (cache, result) => {
+    const payload = getValues("payload");
+    setValue("payload", "");
+    if (result.data) {
+      const {
+        data: {
+          createComment: { ok, id },
+        },
+      } = result;
+      if (ok && userData?.me) {
+        const newComment = {
+          __typename: "Comment",
+          creatdAt: Date.now() + "",
+          id,
+          isMine: true,
+          payload,
+          user: {
+            ...userData.me,
+          },
+        };
+        cache.modify({
+          id: `Photo:${photoId}`,
+          fields: {
+            comments(prev) {
+              return [...prev, newComment];
+            },
+            commentNumber(prev) {
+              return prev + 1;
+            },
+          },
+        });
+      }
+    }
+  };
   const onValid: SubmitHandler<ICommentFormProps> = ({ payload }) => {
     createCommentMutation({
       variables: {
@@ -108,7 +145,6 @@ const Comments: React.FC<ICommentsProps> = ({
       },
       update: createCommentUpdate,
     });
-    setValue("payload", "");
   };
 
   return (
