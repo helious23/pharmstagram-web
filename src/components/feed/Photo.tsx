@@ -132,30 +132,22 @@ const Photo: React.FC<seeFeed_seeFeed> = ({
         },
       } = result;
       if (ok) {
-        const fragmentId = `Photo:${id}`;
-        const fragment = gql`
-          fragment PhotoFragment on Photo {
-            isLiked
-            likes
-          }
-        `;
-        const result: { isLiked: Boolean; likes: number } | null =
-          cache.readFragment({
-            id: fragmentId,
-            fragment,
-          });
-
-        if (result) {
-          const { isLiked: cacheIsLIked, likes: cacheLikes } = result;
-          cache.writeFragment({
-            id: fragmentId,
-            fragment: fragment,
-            data: {
-              isLiked: !cacheIsLIked,
-              likes: cacheIsLIked ? cacheLikes - 1 : cacheLikes + 1,
+        const photoId = `Photo:${id}`;
+        cache.modify({
+          id: photoId,
+          fields: {
+            isLiked(prev) {
+              return !prev;
             },
-          });
-        }
+            likes(prev, { readField }) {
+              if (readField("isLiked")) {
+                return prev - 1;
+              } else {
+                return prev + 1;
+              }
+            },
+          },
+        });
       }
     }
   };
