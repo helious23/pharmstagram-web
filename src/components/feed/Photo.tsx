@@ -205,7 +205,7 @@ const Photo: React.FC<seeFeed_seeFeed> = ({
                 </LikeCountContainer>
               ) : (
                 <LikeCountContainer>
-                  <Avatar url={likedBy?.avatar} />
+                  <Avatar url={likedBy?.avatar} large />
                   <div>
                     <LikedUser>{likedBy?.username}</LikedUser>님
                   </div>

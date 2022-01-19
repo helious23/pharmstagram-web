@@ -15,6 +15,7 @@ import {
   createComment,
   createCommentVariables,
 } from "../../__generated__/createComment";
+import PhotoCaption from "./PhotoCaption";
 
 const CREATE_COMMENT = gql`
   mutation createComment($photoId: Int!, $payload: String!) {
@@ -142,7 +143,7 @@ const Comments: React.FC<ICommentsProps> = ({
           id: `Photo:${photoId}`,
           fields: {
             comments(prev) {
-              return [...prev, newCacheComment];
+              return [newCacheComment, ...prev];
             },
             commentNumber(prev) {
               return prev + 1;
@@ -165,11 +166,11 @@ const Comments: React.FC<ICommentsProps> = ({
   return (
     <CommentsContainer>
       <CommentContents>
-        {caption && <Comment user={user} payload={caption} />}
+        <PhotoCaption user={user} caption={caption} />
         {commentNumber > 0 ? (
           <CommentCount>
             <span>댓글 {commentNumber} 개 </span>
-            {commentNumber > 4 ? <span>모두보기</span> : ""}
+            {commentNumber > 3 ? <span>모두보기</span> : ""}
           </CommentCount>
         ) : (
           ""
@@ -178,6 +179,8 @@ const Comments: React.FC<ICommentsProps> = ({
           (comment) =>
             comment && (
               <Comment
+                id={comment.id}
+                isMine={comment.isMine}
                 key={comment.id}
                 photoId={photoId}
                 user={comment.user}
