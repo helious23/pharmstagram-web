@@ -21,7 +21,6 @@ import {
   faPaperPlane,
   faBookmark,
 } from "@fortawesome/free-regular-svg-icons";
-import { FEED_QUERY } from "../../screens/Home";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
 import Comments from "./Comments";
 
@@ -62,10 +61,11 @@ const PhotoFile = styled.img`
 `;
 
 const PhotoData = styled.div`
-  padding: 1rem;
+  /* padding: 1rem; */
 `;
 
 const PhotoActions = styled.div`
+  padding: 1rem 1rem 0 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -88,7 +88,7 @@ const BookmarkContainer = styled.div`
 `;
 
 const LikeContainer = styled.div`
-  margin-top: 1rem;
+  margin: 1rem 1rem 0 1rem;
 `;
 
 const LikeCountContainer = styled.div`
@@ -220,14 +220,14 @@ const Photo: React.FC<seeFeed_seeFeed> = ({
               ""
             )}
           </Likes>
-          <Comments
-            caption={caption}
-            commentNumber={commentNumber}
-            comments={comments}
-            user={user}
-            photoId={id}
-          />
         </LikeContainer>
+        <Comments
+          caption={caption}
+          commentNumber={commentNumber}
+          comments={comments}
+          user={user}
+          photoId={id}
+        />
       </PhotoData>
     </PhotoContainer>
   );

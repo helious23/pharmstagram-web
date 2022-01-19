@@ -23,7 +23,7 @@ export const Subtitle = styled.div`
 `;
 
 export const FatText = styled.span`
-  font-weight: 700;
+  font-weight: 900;
 `;
 
 export const AuthLabel = styled.label`
