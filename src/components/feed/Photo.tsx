@@ -164,10 +164,12 @@ const Photo: React.FC<seeFeed_seeFeed> = ({
   return (
     <PhotoContainer key={id}>
       <PhotoHeader>
-        <Link to={`/user/${user.username}`}>
+        <Link to={`/users/${user.username}`}>
           <Avatar url={user.avatar} large />
         </Link>
-        <Username>{user.username}</Username>
+        <Link to={`/users/${user.username}`}>
+          <Username>{user.username}</Username>
+        </Link>
       </PhotoHeader>
       <PhotoSection>
         <PhotoFile src={file} />
@@ -197,17 +199,25 @@ const Photo: React.FC<seeFeed_seeFeed> = ({
             {likedBy ? (
               likes === 1 ? (
                 <LikeCountContainer>
-                  <Avatar url={likedBy?.avatar} large />
+                  <Link to={`/users/${likedBy.username}`}>
+                    <Avatar url={likedBy?.avatar} large />
+                  </Link>
                   <div>
-                    <LikedUser>{likedBy?.username}</LikedUser>
-                    님이 좋아합니다
+                    <Link to={`/users/${likedBy.username}`}>
+                      <LikedUser>{likedBy?.username}</LikedUser>
+                    </Link>
+                    <span>님이 좋아합니다</span>
                   </div>
                 </LikeCountContainer>
               ) : (
                 <LikeCountContainer>
-                  <Avatar url={likedBy?.avatar} large />
+                  <Link to={`/users/${likedBy.username}`}>
+                    <Avatar url={likedBy?.avatar} large />
+                  </Link>
                   <div>
-                    <LikedUser>{likedBy?.username}</LikedUser>님
+                    <Link to={`/users/${likedBy.username}`}>
+                      <LikedUser>{likedBy?.username}</LikedUser>님
+                    </Link>
                   </div>
                   <div style={{ marginLeft: 5 }}>
                     <LikeCounter> 외 {likes - 1}명</LikeCounter>이 좋아합니다

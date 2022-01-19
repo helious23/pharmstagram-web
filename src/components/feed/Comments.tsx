@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FatText } from "../shared";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
 import Comment from "./Comment";
 import { SubmitHandler, useForm } from "react-hook-form";

@@ -24,7 +24,9 @@ const CaptionContainer = styled.div`
 const PhotoCaption: React.FC<IPhotoCaptionProps> = ({ user, caption }) => {
   return (
     <PhotoCaptionContainer>
-      <FatText>{user?.username}</FatText>
+      <Link to={`/users/${user.username}`}>
+        <FatText>{user.username}</FatText>
+      </Link>
       <CaptionContainer>
         {caption &&
           caption.split(" ").map((word, index) =>

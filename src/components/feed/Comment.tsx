@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FatText } from "../shared";
 import { seeFeed_seeFeed_comments } from "../../__generated__/seeFeed";
@@ -262,7 +262,9 @@ const Comment: React.FC<ICommentProps> = ({
 
   return (
     <CommentContainer>
-      <FatText>{user?.username}</FatText>
+      <Link to={`/users/${user.username}`}>
+        <FatText>{user.username}</FatText>
+      </Link>
       <CaptionContainer>
         {isMine &&
           (onEditing ? (

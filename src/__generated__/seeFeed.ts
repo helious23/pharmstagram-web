@@ -35,17 +35,17 @@ export interface seeFeed_seeFeed_likedBy {
 
 export interface seeFeed_seeFeed {
   __typename: "Photo";
-  id: number;
   user: seeFeed_seeFeed_user;
-  file: string;
   caption: string | null;
-  likes: number;
-  commentNumber: number;
   comments: (seeFeed_seeFeed_comments | null)[] | null;
   createdAt: string;
   isMine: boolean;
-  isLiked: boolean;
   likedBy: seeFeed_seeFeed_likedBy | null;
+  id: number;
+  file: string;
+  likes: number;
+  commentNumber: number;
+  isLiked: boolean;
 }
 
 export interface seeFeed {

@@ -3,37 +3,30 @@ import PageTitle from "../components/PageTitle";
 import Photo from "../components/feed/Photo";
 import { useState, useEffect } from "react";
 import { seeFeed, seeFeedVariables } from "../__generated__/seeFeed";
+import { COMMENT_FRAGMENT, PHOTO_FRAGMENT } from "../fragments";
 
 export const FEED_QUERY = gql`
   query seeFeed($lastId: Int) {
     seeFeed(lastId: $lastId) {
-      id
       user {
         username
         avatar
       }
-      file
       caption
-      likes
-      commentNumber
       comments {
-        id
-        createdAt
-        payload
-        isMine
-        user {
-          username
-        }
+        ...CommentFragment
       }
       createdAt
       isMine
-      isLiked
       likedBy {
         username
         avatar
       }
+      ...PhotoFragment
     }
   }
+  ${PHOTO_FRAGMENT}
+  ${COMMENT_FRAGMENT}
 `;
 
 const Home = () => {
@@ -43,11 +36,12 @@ const Home = () => {
       lastId: lastId,
     },
   });
-  useEffect(() => {
-    if (data?.seeFeed) {
-      setLastId(data?.seeFeed[data?.seeFeed?.length - 1]?.id);
-    }
-  }, [lastId]);
+
+  // useEffect(() => {
+  //   if (data?.seeFeed) {
+  //     setLastId(data?.seeFeed[data?.seeFeed?.length - 1]?.id);
+  //   }
+  // }, [lastId]);
 
   return (
     <div>
