@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Loading from "./Loading";
 
-const SButton = styled.button<{ valid: Boolean }>`
+export const SButton = styled.button<{ valid?: Boolean }>`
   border: none;
   margin-top: 12px;
   border-radius: 3px;
@@ -31,5 +31,3 @@ export const Button: React.FC<IButtonProps> = ({
     </SButton>
   );
 };
-
-export default Button;

@@ -13,7 +13,7 @@ import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import { Link, useHistory } from "react-router-dom";
 import Seperator from "../components/auth/Seperator";
 import Input from "../components/auth/Input";
-import Button from "../components/auth/Button";
+import { Button } from "../components/auth/Button";
 import BottomBox from "../components/auth/BottomBox";
 import routes from "../routes";
 import StoreWrapper from "../components/auth/StoreWrapper";

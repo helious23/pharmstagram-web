@@ -9,7 +9,7 @@ import {
 } from "../components/shared";
 import routes from "../routes";
 import FormBox from "../components/auth/FormBox";
-import Button from "../components/auth/Button";
+import { Button } from "../components/auth/Button";
 import Seperator from "../components/auth/Seperator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";

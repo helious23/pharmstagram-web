@@ -162,18 +162,26 @@ const Comments: React.FC<ICommentsProps> = ({
     });
   };
 
+  const commentCount = (commentNumber: number) => {
+    if (commentNumber > 3) {
+      return (
+        <>
+          <span>댓글 {commentNumber} 개 </span>
+          <span>모두보기</span>
+        </>
+      );
+    } else if (commentNumber > 0) {
+      return <span>댓글 {commentNumber} 개 </span>;
+    } else if (commentNumber === 0) {
+      return "";
+    }
+  };
+
   return (
     <CommentsContainer>
       <CommentContents>
         <PhotoCaption user={user} caption={caption} />
-        {commentNumber > 0 ? (
-          <CommentCount>
-            <span>댓글 {commentNumber} 개 </span>
-            {commentNumber > 3 ? <span>모두보기</span> : ""}
-          </CommentCount>
-        ) : (
-          ""
-        )}
+        <CommentCount>{commentCount(commentNumber)}</CommentCount>
         {comments?.map(
           (comment) =>
             comment && (

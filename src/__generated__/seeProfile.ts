@@ -32,6 +32,7 @@ export interface seeProfile_seeProfile {
   username: string;
   bio: string | null;
   avatar: string | null;
+  totalPosts: number;
   totalFollowing: number;
   totalFollowers: number;
   isFollowing: boolean;
